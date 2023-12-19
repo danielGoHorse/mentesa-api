@@ -1,0 +1,30 @@
+server:
+  port: 9092
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200mb
+      max-request-size: 215mb
+    context-path: /demo
+spring:
+  application:
+    name: demo
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db-instance-happy-alert.covvdf22qdcg.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=sch_mentesa
+    username: postgres
+    password: teste123
+  jpa:
+    ddl-auto: validade
+    default_schema: sch_mentesa
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
