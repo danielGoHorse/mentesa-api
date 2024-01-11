@@ -34,4 +34,8 @@ public class ContatoMedicoModel {
     @Column(name = "telefone")
     private String telefone;
 
+    //Enum
+    //@Column(name = "especialidade")
+    //private String especialidade;
+
 }

@@ -1,13 +1,12 @@
 package com.example.demo.resources;
 
+import com.example.demo.dto.ContatoMedicoDto;
+import com.example.demo.dto.ContatoPrincipalDto;
 import com.example.demo.service.ContatoPrincipalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ValidationException;
 
@@ -29,4 +28,25 @@ public class ContatoPrincipalController {
         }
     }
 
+    @PostMapping("/editarContatoPrincipal")
+    public ResponseEntity editarContatoPrincipal(@RequestBody ContatoPrincipalDto dto) throws Exception{
+        try {
+            return new ResponseEntity(this._contatoPrincipalService.editar(dto), HttpStatus.OK);
+        } catch (ValidationException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/criarContatoPrincipal")
+    public ResponseEntity criarContatoPrincipal(@RequestBody ContatoPrincipalDto dto) throws Exception{
+        try {
+            return new ResponseEntity(this._contatoPrincipalService.criar(dto), HttpStatus.OK);
+        } catch (ValidationException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
